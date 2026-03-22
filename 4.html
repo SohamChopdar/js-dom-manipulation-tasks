@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JS DOM Assignment</title>
+
+<style>
+body{font-family:Arial;padding:20px}
+
+/* Theme */
+.day{background:white;color:black;padding:20px}
+.night{background:black;color:white;padding:20px}
+.button_day{background:lightgray}
+.button_night{background:gray;color:white}
+
+/* Box */
+.box{
+border:1px solid black;
+margin:10px;
+padding:10px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>JS DOM Assignment</h1>
+
+<!-- 1 DARK THEME -->
+<div id="app" class="day">
+<p>I am a HashedBit student, ready to become an awesome full stack developer</p>
+<button onclick="swapTheme()" id="swap" class="button_day">Toggle theme</button>
+</div>
+
+<hr>
+
+<!-- 2 DIV CREATION -->
+<h3>Div Creation</h3>
+<button onclick="createDiv(200,100,'New Div')">Create Div</button>
+<div id="container"></div>
+
+<hr>
+
+<!-- 3 HIDE SHOW -->
+<h3>Hide / Show Paragraph</h3>
+<p id="useless-paragraph">Useless paragraph.</p>
+<button onclick="toggleVisibility()">Toggle</button>
+
+<hr>
+
+<!-- 4 DYNAMIC CSS -->
+<h3>Dynamic CSS</h3>
+
+<div id="text-container">This is some example text</div>
+
+<input id="colorbox" placeholder="Enter color">
+<button id="colorchange">Change Colour</button>
+
+<br><br>
+
+<input type="range" id="fontsize" min="10" max="100" value="55">
+
+<br><br>
+
+<button id="bold">Bold</button>
+<button id="italic">Italic</button>
+<button id="underline">Underline</button>
+
+<br><br>
+
+<select id="list">
+<option value="serif">Serif</option>
+<option value="sans-serif">Sans-Serif</option>
+<option value="monospace">Monospace</option>
+<option value="cursive">Cursive</option>
+<option value="fantasy">Fantasy</option>
+</select>
+
+<br><br>
+
+<button id="getstyle">Get CSS</button>
+
+<p id="css-props"></p>
+
+<script>
+
+// 1 DARK THEME
+function swapTheme(){
+let app=document.getElementById("app");
+let btn=document.getElementById("swap");
+
+if(app.className==="day"){
+app.className="night";
+btn.className="button_night";
+}else{
+app.className="day";
+btn.className="button_day";
+}
+}
+
+// 2 DIV CREATION
+function createDiv(width,height,text){
+let div=document.createElement("div");
+div.className="box";
+div.style.width=width+"px";
+div.style.height=height+"px";
+div.innerText=text;
+document.getElementById("container").appendChild(div);
+}
+
+// 3 HIDE SHOW
+function toggleVisibility(){
+let p=document.getElementById("useless-paragraph");
+p.style.display = p.style.display==="none"?"block":"none";
+}
+
+// 4 DYNAMIC CSS
+let text=document.getElementById("text-container");
+
+document.getElementById("colorchange").onclick=function(){
+text.style.color=document.getElementById("colorbox").value;
+}
+
+document.getElementById("fontsize").oninput=function(){
+text.style.fontSize=this.value+"px";
+}
+
+document.getElementById("bold").onclick=function(){
+text.style.fontWeight=text.style.fontWeight==="bold"?"normal":"bold";
+}
+
+document.getElementById("italic").onclick=function(){
+text.style.fontStyle=text.style.fontStyle==="italic"?"normal":"italic";
+}
+
+document.getElementById("underline").onclick=function(){
+text.style.textDecoration=text.style.textDecoration==="underline"?"none":"underline";
+}
+
+document.getElementById("list").onchange=function(){
+text.style.fontFamily=this.value;
+}
+
+document.getElementById("getstyle").onclick=function(){
+let css=
+"color: "+text.style.color+"; "+
+"font-size: "+text.style.fontSize+"; "+
+"font-family: "+text.style.fontFamily+"; "+
+"font-weight: "+text.style.fontWeight+"; "+
+"font-style: "+text.style.fontStyle+"; "+
+"text-decoration: "+text.style.textDecoration+";";
+document.getElementById("css-props").innerText=css;
+}
+
+</script>
+
+</body>
+</html>
